@@ -1,0 +1,26 @@
+[project]
+name = "llm-nomic-api-embed"
+version = "0.1"
+description = "Create embeddings using the Nomic API"
+readme = "README.md"
+authors = [{name = "Simon Willison"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "llm",
+    "httpx"
+]
+
+[project.urls]
+Homepage = "https://github.com/simonw/llm-nomic-api-embed"
+Changelog = "https://github.com/simonw/llm-nomic-api-embed/releases"
+Issues = "https://github.com/simonw/llm-nomic-api-embed/issues"
+CI = "https://github.com/simonw/llm-nomic-api-embed/actions"
+
+[project.entry-points.llm]
+nomic_api_embed = "llm_nomic_api_embed"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-recording"]

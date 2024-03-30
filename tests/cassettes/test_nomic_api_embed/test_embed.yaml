@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: '{"model": "nomic-embed-text-v1.5", "texts": ["hello world"], "dimensionality":
+      64}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '82'
+      content-type:
+      - application/json
+      host:
+      - api-atlas.nomic.ai
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: https://api-atlas.nomic.ai/v1/embedding/text
+  response:
+    body:
+      string: '{"embeddings":[[-0.0715332,-0.0075149536,-0.45581055,0.049041748,0.054351807,0.1616211,-0.030197144,-0.1854248,-0.050842285,-0.15356445,-0.015510559,0.00447464,0.1352539,0.21362305,0.08654785,-0.24926758,0.008651733,-0.088256836,-0.099975586,0.16442871,0.015098572,-0.15429688,-0.15368652,0.08337402,0.012512207,-0.017364502,0.037261963,-0.02130127,0.032714844,-0.052490234,-0.1508789,-0.028442383,0.087768555,-0.019622803,0.0848999,-0.078552246,0.081726074,0.04486084,0.12792969,0.025314331,0.045654297,-0.032043457,0.024978638,0.014221191,0.19372559,-0.042388916,0.05444336,0.115478516,0.2878418,-0.24951172,0.035614014,0.012687683,0.053588867,0.06970215,0.1895752,0.15612793,0.08807373,-0.099731445,0.046142578,0.050567627,0.11413574,0.22363281,-0.09631348,0.12158203]],"model":"nomic-embed-text-v1.5","usage":{"prompt_tokens":2,"total_tokens":2}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '850'
+      Content-Security-Policy:
+      - default-src 'self';
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 30 Mar 2024 21:33:07 GMT
+      Server:
+      - nginx/1.23.3
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Origin
+      Via:
+      - 1.1 42d6669d57da2de3a7f8b1123d510158.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 8c8bXsfQUccfsLuvHAbH4NfNzuaATZA4mIV0I105l4don18bgZfopw==
+      X-Amz-Cf-Pop:
+      - SFO53-P3
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - None
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
