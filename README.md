@@ -41,6 +41,14 @@ nomic-embed-text-v1.5-512 (aliases: nomic-1.5-512)
 nomic-embed-text-v1.5-256 (aliases: nomic-1.5-256)
 nomic-embed-text-v1.5-128 (aliases: nomic-1.5-128)
 nomic-embed-text-v1.5-64 (aliases: nomic-1.5-64)
+nomic-embed-vision-v1
+nomic-embed-vision-v1.5
+```
+Vision models can be used with image files using the `--binary` option, for example:
+
+```bash
+llm embed-multi images --files . '*.png' \
+  --binary --model nomic-embed-vision-v1.5
 ```
 
 ## Development
