@@ -38,6 +38,16 @@ def test_embed_vision():
     assert len(result) == 768
 
 
+@pytest.mark.vcr()
+def test_embed_combination():
+    model = llm.get_embedding_model("nomic-embed-combined-v1.5")
+    result = model.embed_batch(["text", TINY_PNG, "more text"])
+    assert isinstance(result, list)
+    assert len(result) == 3
+    for vector in result:
+        assert all(isinstance(item, float) for item in vector)
+
+
 # Nasty monkey-patch to work around https://github.com/kevin1024/vcrpy/issues/656
 def _make_vcr_request(httpx_request, **kwargs):
     try:

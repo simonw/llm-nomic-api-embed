@@ -23,6 +23,21 @@ def register_embedding_models(register):
         )
     register(NomicImageModel("nomic-embed-vision-v1"))
     register(NomicImageModel("nomic-embed-vision-v1.5"))
+    # and the combo models
+    register(
+        NomicCombinedModel(
+            model_id="nomic-embed-combined-v1",
+            text_model_id="nomic-embed-text-v1",
+            vision_model_id="nomic-embed-vision-v1",
+        )
+    )
+    register(
+        NomicCombinedModel(
+            model_id="nomic-embed-combined-v1.5",
+            text_model_id="nomic-embed-text-v1.5",
+            vision_model_id="nomic-embed-vision-v1.5",
+        )
+    )
 
 
 class NomicTextModel(EmbeddingModel):
@@ -82,3 +97,39 @@ class NomicImageModel(EmbeddingModel):
             )
         response.raise_for_status()
         return response.json()["embeddings"]
+
+
+class NomicCombinedModel(EmbeddingModel):
+    needs_key = "nomic"
+    key_env_var = "NOMIC_API_KEY"
+    batch_size = 10
+    supports_binary = True
+    supports_text = True
+
+    def __init__(self, model_id, text_model_id, vision_model_id):
+        self.model_id = model_id
+        self.text_model_id = text_model_id
+        self.vision_model_id = vision_model_id
+
+    def embed_batch(self, items):
+        # Split into text and images
+        texts = []
+        images = []
+        results_by_index = {}
+        for i, item in enumerate(items):
+            if isinstance(item, str):
+                texts.append((i, item))
+            else:
+                images.append((i, item))
+        if texts:
+            model = llm.get_embedding_model(self.text_model_id)
+            vectors = model.embed_batch([item[1] for item in texts])
+            for (index, _), vector in zip(texts, vectors):
+                results_by_index[index] = vector
+        if images:
+            model = llm.get_embedding_model(self.vision_model_id)
+            vectors = model.embed_batch([item[1] for item in images])
+            for (index, _), vector in zip(images, vectors):
+                results_by_index[index] = vector
+        keys = results_by_index.keys()
+        return [results_by_index[key] for key in sorted(keys)]

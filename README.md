@@ -43,12 +43,31 @@ nomic-embed-text-v1.5-128 (aliases: nomic-1.5-128)
 nomic-embed-text-v1.5-64 (aliases: nomic-1.5-64)
 nomic-embed-vision-v1
 nomic-embed-vision-v1.5
+nomic-embed-combined-v1
+nomic-embed-combined-v1.5
 ```
 Vision models can be used with image files using the `--binary` option, for example:
 
 ```bash
 llm embed-multi images --files . '*.png' \
   --binary --model nomic-embed-vision-v1.5
+```
+
+### Combined vision and text models
+
+The `nomic-embed-combined-v1` and `nomic-embed-combined-v1.5` models are special - they will automatically use their respective text models for text inputs and their respective vision models for images.
+
+This means you can use them to create a collection that mixes images and text, or you can create an image collection with them and then use text to find similar images.
+
+Here's how do do that for a `photos/` directory full of JPEGs:
+
+```bash
+llm embed-multi --binary -m nomic-embed-combined-v1.5 \
+  -d photos.db photos --files photos/ '*.jpeg'
+```
+Then run similarity searches like this:
+```bash
+llm similar photos -d photos.db -c pelican
 ```
 
 ## Development
