@@ -1,6 +1,6 @@
 [project]
 name = "llm-nomic-api-embed"
-version = "0.1"
+version = "0.2"
 description = "Create embeddings using the Nomic API"
 readme = "README.md"
 authors = [{name = "Simon Willison"}]
